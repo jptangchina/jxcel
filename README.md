@@ -1,4 +1,4 @@
-[![](https://img.shields.io/badge/version-1.0.0-orange.svg)](https://mvnrepository.com/artifact/com.jptangchina/jxcel/1.0.0 )
+[![](https://img.shields.io/badge/version-1.0.1-orange.svg)](https://mvnrepository.com/artifact/com.jptangchina/jxcel/1.0.0 )
 [![](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://mit-license.org )
 
 
@@ -29,6 +29,7 @@ Jxcel是一个支持Java对象与Excel（目前仅xlsx、xls）互相转换的�
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @JxcelSheet("学生名单")
 class Student {
     @JxcelCell("年龄")

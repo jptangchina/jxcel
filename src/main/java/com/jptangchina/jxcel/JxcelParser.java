@@ -67,6 +67,7 @@ public class JxcelParser {
 
     private Object parseStringWithMatchedType(String value, Field field) {
         JxcelCell jxcelCell = field.getAnnotation(JxcelCell.class);
+        value = removeSuffix(value, jxcelCell);
         Class<?> fieldType = field.getType();
         if(jxcelCell.parse().length > 0) {
             List<String> parseData = Arrays.asList(jxcelCell.parse());
@@ -78,10 +79,21 @@ public class JxcelParser {
             }
         }
         if(Date.class.equals(fieldType)) {
-            DateTime dateTime = DateTime.parse(value);
-            return new Date(dateTime.getMillis());
+            if(isValidLong(value)) {
+                return new DateTime(Long.valueOf(value)).toDate();
+            }
+            return DateTime.parse(value).toDate();
         }
         return parseStringToBasicDataType(value, fieldType);
+    }
+
+    private String removeSuffix(String value, JxcelCell jxcelCell) {
+        if(!Strings.isNullOrEmpty(jxcelCell.suffix())
+            && value.contains(jxcelCell.suffix())
+            && value.indexOf(jxcelCell.suffix()) == (value.length() - jxcelCell.suffix().length())) {
+            value = value.substring(0, value.lastIndexOf(jxcelCell.suffix()));
+        }
+        return value;
     }
 
     private Object parseStringToBasicDataType(String value, Class<?> fieldType) {
@@ -113,13 +125,28 @@ public class JxcelParser {
         if(null == cell) {
             return "";
         }
-        switch (cell.getCellType()) {
-            case NUMERIC:
-                DecimalFormat df = new DecimalFormat();
-                return df.format(cell.getNumericCellValue());
-            default:
-                return cell.getStringCellValue();
+        if (cell.getCellType() == CellType.NUMERIC) {
+            if (DateUtil.isCellDateFormatted(cell)) {
+                return String.valueOf(cell.getDateCellValue().getTime());
+            }
+            DecimalFormat df = new DecimalFormat();
+            return df.format(cell.getNumericCellValue());
         }
+        return cell.toString();
+    }
+
+    private boolean isValidLong(String longValue) {
+        if( Strings.isNullOrEmpty(longValue) ){
+            return false;
+        }
+
+        for(int i = longValue.length(); --i >= 0;){
+            int c = longValue.charAt(i);
+            if( c < 48 || c > 57 ){
+                return false;
+            }
+        }
+        return true;
     }
 
     public static JxcelParser parser() {

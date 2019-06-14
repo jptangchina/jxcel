@@ -10,7 +10,7 @@ import java.util.List;
 public class JxcelParserTest {
 
     @Test
-    public void testGenerateToWorkbook() {
+    public void testParseFromFile() {
         List<Student> result = JxcelParser.parser().parseFromFile(Student.class, new File("/Users/jptang/Desktop/jxcel.xlsx"));
         Assert.assertTrue(result.size() > 0);
     }
