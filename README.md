@@ -1,4 +1,4 @@
-[![](https://img.shields.io/badge/version-1.0.1-orange.svg)](https://mvnrepository.com/artifact/com.jptangchina/jxcel/1.0.0 )
+[![](https://img.shields.io/badge/version-1.0.2-orange.svg)](https://mvnrepository.com/artifact/com.jptangchina/jxcel/1.0.0 )
 [![](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://mit-license.org )
 
 

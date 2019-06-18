@@ -33,7 +33,7 @@ public @interface JxcelCell {
      * 如果字段为日期格式，可以在这里定义导入导出的日期格式
      * @return format of date
      */
-    String format() default "";
+    String format() default "yyyy-MM-dd HH:mm:ss:SSS";
 
     /**
      * 为字段添加后缀。

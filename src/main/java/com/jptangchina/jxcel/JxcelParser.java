@@ -7,6 +7,7 @@ import com.jptangchina.jxcel.exception.JxcelParseException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
 import java.io.File;
 import java.io.IOException;
@@ -82,7 +83,7 @@ public class JxcelParser {
             if(isValidLong(value)) {
                 return new DateTime(Long.valueOf(value)).toDate();
             }
-            return DateTime.parse(value).toDate();
+            return DateTime.parse(value, DateTimeFormat.forPattern(jxcelCell.format())).toDate();
         }
         return parseStringToBasicDataType(value, fieldType);
     }
