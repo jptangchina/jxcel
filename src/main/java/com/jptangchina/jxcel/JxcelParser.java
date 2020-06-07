@@ -79,7 +79,7 @@ public class JxcelParser {
                 return index;
             }
         }
-        if(Date.class.equals(fieldType)) {
+        if(Date.class.equals(fieldType) && !Strings.isNullOrEmpty(value)) {
             if(isValidLong(value)) {
                 return new DateTime(Long.valueOf(value)).toDate();
             }
@@ -104,7 +104,7 @@ public class JxcelParser {
         if (Byte.class.equals(fieldType) || Byte.TYPE.equals(fieldType)) {
             return Byte.valueOf(value);
         } else if (Boolean.class.equals(fieldType) || Boolean.TYPE.equals(fieldType)) {
-            return Boolean.valueOf(value) || "1".equals(value);
+            return Boolean.parseBoolean(value) || "1".equals(value);
         } else if (String.class.equals(fieldType)) {
             return value;
         } else if (Short.class.equals(fieldType) || Short.TYPE.equals(fieldType)) {
@@ -137,10 +137,6 @@ public class JxcelParser {
     }
 
     private boolean isValidLong(String longValue) {
-        if( Strings.isNullOrEmpty(longValue) ){
-            return false;
-        }
-
         for(int i = longValue.length(); --i >= 0;){
             int c = longValue.charAt(i);
             if( c < 48 || c > 57 ){

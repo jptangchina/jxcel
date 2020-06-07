@@ -6,7 +6,7 @@
 
     <groupId>com.jptangchina</groupId>
     <artifactId>jxcel</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.2-alpha</version>
 
     <name>jxcel</name>
     <url>https://github.com/jptangchina/jxcel</url>

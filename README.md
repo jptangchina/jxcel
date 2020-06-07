@@ -1,6 +1,14 @@
-[![](https://img.shields.io/badge/version-1.0.2-orange.svg)](https://mvnrepository.com/artifact/com.jptangchina/jxcel/1.0.0 )
+[![](https://img.shields.io/badge/version-1.0.2--alpha1-orange.svg)](https://mvnrepository.com/artifact/com.jptangchina/jxcel/1.0.0 )
 [![](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://mit-license.org )
 
+
+## 说明（非常重要）
+1. 之前错误的将开发版作为正式版本发布到了中央仓库（其实应该还是Alpha版，只是为了玩一玩才发布的），因此将最新版发布为Alpha版本重新发布
+2. 如果不是特别追求客制化的需求，阿里的[easyexcel](https://github.com/alibaba/easyexcel)我是极为推荐的
+3. 这个版本的代码是用的Apache poi操作的（存在内存溢出可能，可自行搜索引擎），所以在内存方面的问题是需要使用者考量的(后面有时间或许会基于easyexcel做二次开发)
+4. 关于反射的效率问题，反射的结果应该需要做缓存保存起来而不是每次都执行。或者干脆换用其他的反射或者实现方式
+5. 内测版还存在很多的bug，代码的水平也还很拙劣。如果只是作为一个想法上的参考我觉得是可以的，但是如果投入实际使用还请结合前面几点三思
+6. 暂时还没啥想到要写的，欢迎提issue
 
 ## Jxcel简介
 Jxcel是一个支持Java对象与Excel（目前仅xlsx、xls）互相转换的工具包。

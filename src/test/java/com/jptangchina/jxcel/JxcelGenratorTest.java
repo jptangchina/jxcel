@@ -4,6 +4,7 @@ import com.jptangchina.jxcel.bean.Student;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import javax.swing.filechooser.FileSystemView;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -22,8 +23,10 @@ public class JxcelGenratorTest {
     @Test
     public void testGenerateToWorkbook() {
         Student student = new Student(18, 0, "JptangChina", new Date(), "18510010000");
-        List<Student> list = Arrays.asList(student);
-        xlsxGenerator.generateFile(list, "/Users/jptang/Desktop/jxcel.xlsx");
+        Student student2 = new Student(16, 1, "JptangChina2", null, "12345");
+        List<Student> list = Arrays.asList(student, student2);
+        String desktop = FileSystemView.getFileSystemView().getHomeDirectory().getPath();
+        xlsxGenerator.generateFile(list, desktop + "/jxcel.xlsx");
     }
 
 }

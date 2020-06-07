@@ -68,15 +68,19 @@ public class JxcelGenrator {
         Object value = field.get(obj);
         // 日期格式处理
         if(field.getType() == Date.class) {
-            DateTime time = new DateTime(value);
-            if(!Strings.isNullOrEmpty(jxcelCell.format())) {
-                value = time.toString(jxcelCell.format());
+            if (value == null) {
+                value = "";
+            } else {
+                DateTime time = new DateTime(value);
+                if(!Strings.isNullOrEmpty(jxcelCell.format())) {
+                    value = time.toString(jxcelCell.format());
+                }
             }
         }
         // 内容转换
         if(jxcelCell.parse().length > 0) {
             if (Boolean.class.equals(field.getType()) || Boolean.TYPE.equals(field.getType())) {
-                int index = Boolean.valueOf(value.toString()) ? 1 : 0;
+                int index = Boolean.parseBoolean(value.toString()) ? 1 : 0;
                 value = jxcelCell.parse()[index];
             }else {
                 int index = (int)value;
@@ -126,6 +130,7 @@ public class JxcelGenrator {
                     throw new JxcelGenerateException("Can not get value.");
                 }
             });
+            cellIndex.set(0);
         });
     }
 
